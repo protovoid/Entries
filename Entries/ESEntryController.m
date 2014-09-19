@@ -22,6 +22,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [[ESEntryController alloc] init];
+        sharedInstance.entries = @[]; // create empty array
         
         // [sharedInstance loadFromDefaults];
     });
@@ -31,7 +32,7 @@
 
 - (void)addEntry:(NSDictionary *)entry; {
     
-    NSMutableArray *mutableEntries = [self.entries mutableCopy]; // ref all objects into a new mutable array
+    NSMutableArray *mutableEntries = [[NSMutableArray alloc] initWithArray:self.entries]; // ref all objects into a new mutable array
     
     [mutableEntries addObject:entry]; // adds the entry to the mutable array
     
